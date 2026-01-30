@@ -199,16 +199,27 @@ function badge(section,id,color){
   document.getElementById(section).appendChild(d);
 }
 
+<script>
 function flipCoin(){
-  const coin=document.getElementById("coin"),
-        res=document.getElementById("tossResult");
-  coin.style.display="block";
-  coin.style.animation="spin 2s ease-in-out";
-  setTimeout(()=>{
-     const winner=Math.random()<0.5?'Team 1':'Team 2';
-     coin.style.animation="none";
-     res.innerHTML=`🏆 ${winner} won the toss!`;
-  },2000);
+  const coin = document.getElementById("coin");
+  const res  = document.getElementById("tossResult");
+
+  coin.style.display = "block";
+  coin.style.animation = "spin 2s ease-in-out";
+  res.innerHTML = "";
+
+  setTimeout(() => {
+    const winner = Math.random() < 0.5 ? "team1" : "team2";
+    coin.style.animation = "none";
+
+    if (winner === "team1") {
+      coin.style.background = "radial-gradient(circle, red 60%, darkred)";
+      res.innerHTML = '<span style="color:red;">🏆 Team 1 Won the Toss!</span>';
+    } else {
+      coin.style.background = "radial-gradient(circle, deepskyblue 60%, navy)";
+      res.innerHTML = '<span style="color:deepskyblue;">🏆 Team 2 Won the Toss!</span>';
+    }
+  }, 2000);
 }
 </script>
 
