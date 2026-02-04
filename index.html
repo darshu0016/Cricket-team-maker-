@@ -226,6 +226,10 @@ function generateAssignments(n){
 
 function generateButtons(){
 
+  // ✅ FORCE ENABLE number mode (CRITICAL FIX)
+  document.getElementById("generateBtn").disabled = false;
+  document.getElementById("nameBtn").disabled = false;
+
   // 🔹 HIDE OTHER STAGES (ADD THESE FIRST)
   document.getElementById("nameInputBox").style.display = "none";
   document.getElementById("singlesBox").style.display = "none";
@@ -317,7 +321,7 @@ function showNameInputs(){
   }
 
   // ❌ Disable number mode
-  document.getElementById("generateBtn").disabled = true;
+  document.getElementById("generateBtn").disabled = false;
 
   const box = document.getElementById("nameInputBox");
   box.innerHTML = "<h3>Enter Player Names</h3>";
