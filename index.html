@@ -73,10 +73,18 @@ body {
   color: #fff;
 }   
 #pageTitle {
-  color: #263238;   /* same orange family as Generate button */
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.titleBadge {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 999px;        /* pill / box shape */
+  background-color: #6a1b9a;   /* choose any color */
+  color: #fff;
   font-weight: 700;
-  margin-bottom: 8px;
-}    
+}
 </style>
 </head>
 <body>
@@ -119,6 +127,7 @@ let assignments={}, totalPlayers=0;
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}}
 
 function generateAssignments(n){
+    
   const ids=Array.from({length:n},(_,i)=>i+1);
   shuffle(ids);
   assignments={};
@@ -132,6 +141,7 @@ function generateAssignments(n){
 }
 
 function generateButtons(){
+    document.getElementById("generateBtn").classList.add("clicked");
   const n=parseInt(document.getElementById("numPlayers").value);
   if(!n||n<4||n>22){alert("Enter between 4 and 22 players.");return;}
   totalPlayers=n;generateAssignments(n);
@@ -177,6 +187,7 @@ function badge(section,id,color){
 }
 
 function flipCoin(){
+    document.getElementById("flipBtn").classList.add("clicked"
   const coin=document.getElementById("coin"),
         res=document.getElementById("tossResult");
 
