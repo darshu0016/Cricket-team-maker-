@@ -120,6 +120,32 @@ body {
 .inputHint span {
   color: #ffeb3b;
 }    
+.mainActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* SAME size for both buttons */
+#generateBtn,
+#nameBtn {
+  width: 260px;
+  height: 48px;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+}   
+#assignBtn {
+  width: 260px;
+  height: 48px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 8px;
+}    
 </style>
 </head>
 <body>
@@ -140,12 +166,15 @@ friendly, street, and local cricket matches.
 <button id="generateBtn" onclick="generateButtons()">
   Generate Players 🏏
 </button>
-<button id="nameBtn" onclick="showNameInputs()">
-  Generate Using Names 🧑‍🤝‍🧑
-</button>
-<button id="generateBtn" onclick="generateButtons()">
-  Generate Players 🏏
-</button>
+<div class="mainActions">
+  <button id="generateBtn" onclick="generateButtons()">  
+    Generate Players 🏏  
+  </button>
+
+  <button id="nameBtn" onclick="showNameInputs()">  
+    Generate Using Names 🧑‍🤝‍🧑  
+  </button>
+</div>
 
 <div class="player-buttons" id="playerButtons"></div>    
 
@@ -185,6 +214,8 @@ function generateAssignments(n){
 }
 
 function generateButtons(){
+  document.getElementById("nameInputBox").style.display = "none";
+document.getElementById("nameBtn").disabled = true;  
   const genBtn = document.getElementById("generateBtn");
   if (genBtn) genBtn.classList.add("clicked");
 
@@ -222,6 +253,7 @@ function generateButtons(){
   setTimeout(() => {
     if (genBtn) genBtn.classList.remove("clicked");
   }, 150);
+    document.getElementById("nameBtn").disabled = false;
     }
 function reveal(btn,id){
   const team=assignments[id];
@@ -249,11 +281,13 @@ function badge(section,id,color){
 }
 function showNameInputs(){
   const n = parseInt(document.getElementById("numPlayers").value);
-
   if(!n || n < 4 || n > 22){
     alert("First enter number of players (4–22)");
     return;
   }
+
+  // ❌ Disable number mode
+  document.getElementById("generateBtn").disabled = true;
 
   const box = document.getElementById("nameInputBox");
   box.innerHTML = "<h3>Enter Player Names</h3>";
@@ -265,18 +299,18 @@ function showNameInputs(){
     `;
   }
 
+  // ✅ Assign button appears ONLY NOW
   box.innerHTML += `
-    <button onclick="assignNames(${n})">
+    <button id="assignBtn" onclick="assignNames(${n})">
       Assign Teams 🎯
     </button>
   `;
 
   box.style.display = "block";
-}    
+}
 function assignNames(n){
-  generateAssignments(n); // reuse your existing logic
+  generateAssignments(n);
 
-  // Clear old results
   document.getElementById("team1").innerHTML = "";
   document.getElementById("team2").innerHTML = "";
   document.getElementById("both").innerHTML = "";
@@ -284,12 +318,11 @@ function assignNames(n){
   document.getElementById("resultBox").style.display = "block";
 
   for(let i = 1; i <= n; i++){
-    const nameInput = document.getElementById("pname" + i);
-    const name = nameInput.value || ("Player " + i);
+    const name = document.getElementById("pname" + i).value || ("Player " + i);
     const team = assignments[i];
 
     const badge = document.createElement("div");
-    badge.className = "badge " + 
+    badge.className = "badge " +
       (team === "team1" ? "red" : team === "team2" ? "blue" : "green");
 
     badge.textContent = name;
@@ -303,7 +336,10 @@ function assignNames(n){
       document.getElementById("both").appendChild(badge);
     }
   }
-}
+
+  // ✅ RE-ENABLE number mode AFTER name assignment completes
+  document.getElementById("generateBtn").disabled = false;
+}    
 function flipCoin(){
   const flipBtn = document.getElementById("flipBtn");
   if (flipBtn) flipBtn.classList.add("clicked");
