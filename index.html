@@ -95,14 +95,32 @@ body {
 }
 
 .titleBadge {
-  display: inline-block;
-  padding: 10px 24px;
-  border-radius: 999px;        /* pill / box shape */
-  background-color: #6a1b9a;   /* choose any color */
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 26px;
+  border-radius: 999px;
+
+  background: linear-gradient(135deg, #7b1fa2, #512da8);
   color: #fff;
+
+  font-size: 22px;
   font-weight: 700;
+  letter-spacing: 0.5px;
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
-</style>
+.inputHint {
+  font-size: 17px;
+  font-weight: 700;
+  margin: 12px 0 6px;
+}
+
+.inputHint span {
+  color: #ffeb3b;
+}    
+style>
 </head>
 <body>
 
@@ -115,7 +133,9 @@ themselves into two fair cricket teams and perform a virtual coin toss for
 friendly, street, and local cricket matches.
 </p>
     
-<label>Enter number of players (4–22):</label><br>
+<div class="inputHint">
+  👥 Enter number of players <span>(4–22)</span>
+</div>
 <input type="number" id="numPlayers" min="4" max="22" value="6">
 <button id="generateBtn" onclick="generateButtons()">
   Generate Players 🏏
@@ -163,7 +183,9 @@ function generateButtons(){
   const n = parseInt(document.getElementById("numPlayers").value);
   if(!n || n < 4 || n > 22){
     alert("Enter between 4 and 22 players.");
-     if (genBtn) genBtn.classList.remove("clicked"); 
+     setTimeout(() => {
+  if (genBtn) genBtn.classList.remove("clicked");
+}, 150); 
     return;
   }
 
