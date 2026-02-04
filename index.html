@@ -7,22 +7,22 @@
     
 
 <!-- SEO Title -->
-<title>Cricket Team Assigner 🏏 | Random Team Generator & Toss Tool</title>
+<title>Cricket Team Maker 🏏 | Random Team Generator & Toss Tool</title>
 
 <!-- SEO Meta Tags -->
 <meta name="description" content="Cricket Team Assigner is a free online tool to randomly divide players into two cricket teams with a fair coin toss. Perfect for local, street, and friendly cricket matches.">
-<meta name="keywords" content="cricket team assigner, cricket team generator, random cricket teams, cricket toss tool, local cricket app">
-<meta name="author" content="Cricket Team Assigner">
+<meta name="keywords" content="cricket team generator,cricket team assigner,cricket team maker,random cricket teams,cricket toss tool, team generator, local cricket app">
+<meta name="author" content="Cricket Team Maker">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph (WhatsApp / Facebook Preview) -->
-<meta property="og:title" content="Cricket Team Assigner 🏏">
+<meta property="og:title" content="Cricket Team Maker 🏏">
 <meta property="og:description" content="Instantly create fair cricket teams and decide the toss online. Simple, fast, and free.">
 <meta property="og:type" content="website">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Cricket Team Assigner 🏏">
+<meta name="twitter:title" content="Cricket Team Maker 🏏">
 <meta name="twitter:description" content="Random cricket team generator with toss feature.">
 
 <style>
@@ -50,10 +50,16 @@ body {
 </head>
 <body>
 
-<h2>🏏 Cricket Team Assigner</h2>
-<label>Enter number of players (5–22):</label><br>
-<input type="number" id="numPlayers" min="5" max="22" value="6">
-<button onclick="generateButtons()">Generate Players 🎮</button>
+<h2>🏏 Cricket Team Maker 🏏</h2>
+<p>
+Cricket Team Assigner is a free online tool that helps players randomly divide
+themselves into two fair cricket teams and perform a virtual coin toss for
+friendly, street, and local cricket matches.
+</p>
+    
+<label>Enter number of players (4–22):</label><br>
+<input type="number" id="numPlayers" min="4" max="22" value="6">
+<button onclick="generateButtons()">Generate Players 🏏</button>
 
 <div class="player-buttons" id="playerButtons"></div>
 
@@ -90,7 +96,7 @@ function generateAssignments(n){
 
 function generateButtons(){
   const n=parseInt(document.getElementById("numPlayers").value);
-  if(!n||n<5||n>22){alert("Enter between 5 and 22 players.");return;}
+  if(!n||n<4||n>22){alert("Enter between 4 and 22 players.");return;}
   totalPlayers=n;generateAssignments(n);
   document.getElementById("playerButtons").innerHTML="";
   document.getElementById("resultBox").style.display="block";
