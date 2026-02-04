@@ -72,6 +72,23 @@ body {
   background: linear-gradient(135deg, #9c27b0, #6a1b9a);
   color: #fff;
 }   
+/* Smooth transition ONLY for main action buttons */
+#generateBtn,
+#flipBtn {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+/* Zoom-in when clicked */
+#generateBtn.clicked,
+#flipBtn.clicked {
+  transform: scale(1.12);
+}
+
+/* Optional press-down feel */
+#generateBtn:active,
+#flipBtn:active {
+  transform: scale(0.96);
+}    
 #pageTitle {
   text-align: center;
   margin-bottom: 15px;
@@ -146,6 +163,7 @@ function generateButtons(){
   const n = parseInt(document.getElementById("numPlayers").value);
   if(!n || n < 4 || n > 22){
     alert("Enter between 4 and 22 players.");
+     if (genBtn) genBtn.classList.remove("clicked"); 
     return;
   }
 
@@ -216,6 +234,7 @@ function flipCoin(){
         coin.style.background="radial-gradient(circle,deepskyblue 60%,navy)";
         res.innerHTML='<span style="color:deepskyblue;">🏆 Team 2 Won the Toss!</span>';
      }
+      if (flipBtn) flipBtn.classList.remove("clicked");
   }, 2000);
 }
 </script>
