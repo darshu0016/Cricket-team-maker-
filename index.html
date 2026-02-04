@@ -180,12 +180,18 @@ function generateButtons(){
   const genBtn = document.getElementById("generateBtn");
   if (genBtn) genBtn.classList.add("clicked");
 
+  // ✅ Force repaint so click animation shows
+  genBtn.offsetHeight;
+
   const n = parseInt(document.getElementById("numPlayers").value);
-  if(!n || n < 4 || n > 22){
+  if (!n || n < 4 || n > 22) {
     alert("Enter between 4 and 22 players.");
-     setTimeout(() => {
-  if (genBtn) genBtn.classList.remove("clicked");
-}, 150); 
+
+    // ✅ Reset button on error
+    setTimeout(() => {
+      if (genBtn) genBtn.classList.remove("clicked");
+    }, 150);
+
     return;
   }
 
@@ -201,12 +207,17 @@ function generateButtons(){
   document.getElementById("coin").style.display = "none";
   document.getElementById("tossResult").innerHTML = "";
 
-  for(let i = 1; i <= n; i++){
+  for (let i = 1; i <= n; i++) {
     const b = document.createElement("button");
     b.textContent = "Player " + i;
     b.onclick = () => reveal(b, i);
     document.getElementById("playerButtons").appendChild(b);
   }
+
+  // ✅ Reset button AFTER generation completes
+  setTimeout(() => {
+    if (genBtn) genBtn.classList.remove("clicked");
+  }, 150);
 }
 function reveal(btn,id){
   const team=assignments[id];
