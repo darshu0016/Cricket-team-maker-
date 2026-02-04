@@ -46,6 +46,16 @@ body {
     .red{background:red;}
     .blue{background:deepskyblue;color:#003;}
     .green{background:limegreen;color:#003;}
+    #generateBtn {
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  color: #fff;
+  font-weight: bold;
+}
+
+#generateBtn:hover {
+  transform: scale(1.08);
+  opacity: 0.95;
+}
 </style>
 </head>
 <body>
@@ -59,7 +69,9 @@ friendly, street, and local cricket matches.
     
 <label>Enter number of players (4–22):</label><br>
 <input type="number" id="numPlayers" min="4" max="22" value="6">
-<button onclick="generateButtons()">Generate Players 🏏</button>
+<button id="generateBtn" onclick="generateButtons()">
+  Generate Players 🏏
+</button>
 
 <div class="player-buttons" id="playerButtons"></div>
 
