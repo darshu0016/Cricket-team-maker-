@@ -126,8 +126,7 @@ let assignments={}, totalPlayers=0;
 
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}}
 
-function generateAssignments(n){
-    
+function generateAssignments(n){ 
   const ids=Array.from({length:n},(_,i)=>i+1);
   shuffle(ids);
   assignments={};
@@ -141,26 +140,34 @@ function generateAssignments(n){
 }
 
 function generateButtons(){
-    document.getElementById("generateBtn").classList.add("clicked");
-  const n=parseInt(document.getElementById("numPlayers").value);
-  if(!n||n<4||n>22){alert("Enter between 4 and 22 players.");return;}
-  totalPlayers=n;generateAssignments(n);
-  document.getElementById("playerButtons").innerHTML="";
-  document.getElementById("resultBox").style.display="block";
-  document.getElementById("team1").innerHTML="";
-  document.getElementById("team2").innerHTML="";
-  document.getElementById("both").innerHTML="";
-  document.getElementById("bothLabel").style.display="none";
-  document.getElementById("coin").style.display="none";
-  document.getElementById("tossResult").innerHTML="";
-  for(let i=1;i<=n;i++){
-    const b=document.createElement("button");
-    b.textContent="Player "+i;
-    b.onclick=()=>reveal(b,i);
+  const genBtn = document.getElementById("generateBtn");
+  if (genBtn) genBtn.classList.add("clicked");
+
+  const n = parseInt(document.getElementById("numPlayers").value);
+  if(!n || n < 4 || n > 22){
+    alert("Enter between 4 and 22 players.");
+    return;
+  }
+
+  totalPlayers = n;
+  generateAssignments(n);
+
+  document.getElementById("playerButtons").innerHTML = "";
+  document.getElementById("resultBox").style.display = "block";
+  document.getElementById("team1").innerHTML = "";
+  document.getElementById("team2").innerHTML = "";
+  document.getElementById("both").innerHTML = "";
+  document.getElementById("bothLabel").style.display = "none";
+  document.getElementById("coin").style.display = "none";
+  document.getElementById("tossResult").innerHTML = "";
+
+  for(let i = 1; i <= n; i++){
+    const b = document.createElement("button");
+    b.textContent = "Player " + i;
+    b.onclick = () => reveal(b, i);
     document.getElementById("playerButtons").appendChild(b);
   }
 }
-
 function reveal(btn,id){
   const team=assignments[id];
   const tb=document.getElementById("soundBoth");
