@@ -140,8 +140,16 @@ friendly, street, and local cricket matches.
 <button id="generateBtn" onclick="generateButtons()">
   Generate Players 🏏
 </button>
+<button id="nameBtn" onclick="showNameInputs()">
+  Generate Using Names 🧑‍🤝‍🧑
+</button>
+<button id="generateBtn" onclick="generateButtons()">
+  Generate Players 🏏
+</button>
 
-<div class="player-buttons" id="playerButtons"></div>
+<div class="player-buttons" id="playerButtons"></div>    
+
+<div id="nameInputBox" style="display:none;margin-top:15px;"></div>
 
 <div id="resultBox" style="display:none;">
   <h3 style="color:red;">Team 1 🔴</h3><div id="team1"></div>
@@ -239,7 +247,63 @@ function badge(section,id,color){
   d.textContent=id;
   document.getElementById(section).appendChild(d);
 }
+function showNameInputs(){
+  const n = parseInt(document.getElementById("numPlayers").value);
 
+  if(!n || n < 4 || n > 22){
+    alert("First enter number of players (4–22)");
+    return;
+  }
+
+  const box = document.getElementById("nameInputBox");
+  box.innerHTML = "<h3>Enter Player Names</h3>";
+
+  for(let i = 1; i <= n; i++){
+    box.innerHTML += `
+      <input type="text" id="pname${i}" placeholder="Player ${i} name">
+      <br>
+    `;
+  }
+
+  box.innerHTML += `
+    <button onclick="assignNames(${n})">
+      Assign Teams 🎯
+    </button>
+  `;
+
+  box.style.display = "block";
+}    
+function assignNames(n){
+  generateAssignments(n); // reuse your existing logic
+
+  // Clear old results
+  document.getElementById("team1").innerHTML = "";
+  document.getElementById("team2").innerHTML = "";
+  document.getElementById("both").innerHTML = "";
+  document.getElementById("bothLabel").style.display = "none";
+  document.getElementById("resultBox").style.display = "block";
+
+  for(let i = 1; i <= n; i++){
+    const nameInput = document.getElementById("pname" + i);
+    const name = nameInput.value || ("Player " + i);
+    const team = assignments[i];
+
+    const badge = document.createElement("div");
+    badge.className = "badge " + 
+      (team === "team1" ? "red" : team === "team2" ? "blue" : "green");
+
+    badge.textContent = name;
+
+    if(team === "team1"){
+      document.getElementById("team1").appendChild(badge);
+    }else if(team === "team2"){
+      document.getElementById("team2").appendChild(badge);
+    }else{
+      document.getElementById("bothLabel").style.display = "block";
+      document.getElementById("both").appendChild(badge);
+    }
+  }
+}
 function flipCoin(){
   const flipBtn = document.getElementById("flipBtn");
   if (flipBtn) flipBtn.classList.add("clicked");
