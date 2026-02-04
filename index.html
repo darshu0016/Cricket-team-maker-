@@ -224,8 +224,19 @@ function generateAssignments(n){
 }
 
 function generateButtons(){
+function generateButtons(){
+
+  // 🔹 HIDE OTHER STAGES (ADD THESE FIRST)
   document.getElementById("nameInputBox").style.display = "none";
-document.getElementById("nameBtn").disabled = true;  
+  document.getElementById("singlesBox").style.display = "none";
+
+  // 🔹 CLEAR OLD NUMBER OUTPUT (VERY IMPORTANT)
+  document.getElementById("playerButtons").innerHTML = "";
+  document.getElementById("resultBox").style.display = "none";
+
+  // 🔹 Disable other mode temporarily
+  document.getElementById("nameBtn").disabled = true;
+
   const genBtn = document.getElementById("generateBtn");
   if (genBtn) genBtn.classList.add("clicked");
 
@@ -235,10 +246,13 @@ document.getElementById("nameBtn").disabled = true;
 
     setTimeout(() => {
       if (genBtn) genBtn.classList.remove("clicked");
+      document.getElementById("nameBtn").disabled = false;
     }, 150);
 
     return;
   }
+
+  // 🔹 rest of your existing logic continues here…
 
   totalPlayers = n;
   generateAssignments(n);
@@ -290,9 +304,11 @@ function badge(section,id,color){
   document.getElementById(section).appendChild(d);
 }
 function showNameInputs(){
-  // 🔹 Hide number-based stage
+
+  // 🔹 Hide number & singles stages
   document.getElementById("playerButtons").innerHTML = "";
-  document.getElementById("resultBox").style.display = "none";  
+  document.getElementById("resultBox").style.display = "none";
+  document.getElementById("singlesBox").style.display = "none";
 
   const n = parseInt(document.getElementById("numPlayers").value);
   if(!n || n < 4 || n > 22){
@@ -354,12 +370,13 @@ function assignNames(n){
   // ✅ RE-ENABLE number mode AFTER name assignment completes
   document.getElementById("generateBtn").disabled = false;
 }   
-function startSingles(){
-  // 🔹 Hide other stages
+
+ function startSingles(){
+
+  // 🔹 Hide number & name stages
   document.getElementById("playerButtons").innerHTML = "";
   document.getElementById("resultBox").style.display = "none";
   document.getElementById("nameInputBox").style.display = "none";
-
   const n = parseInt(document.getElementById("numPlayers").value);
   if(!n || n < 2 || n > 22){
     alert("Enter number of players (2–22)");
