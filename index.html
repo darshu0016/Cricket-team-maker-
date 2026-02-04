@@ -46,21 +46,42 @@ body {
     .red{background:red;}
     .blue{background:deepskyblue;color:#003;}
     .green{background:limegreen;color:#003;}
-    #generateBtn {
+   /* Default state */
+#generateBtn {
   background: linear-gradient(135deg, #ff9800, #ff5722);
   color: #fff;
   font-weight: bold;
+  transition: 0.2s;
 }
 
-#generateBtn:hover {
-  transform: scale(1.08);
-  opacity: 0.95;
+/* After click state */
+#generateBtn.clicked {
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: #fff;
 }
+/* Flip Coin button - default */
+#flipBtn {
+  background: linear-gradient(135deg, #2196f3, #1565c0);
+  color: #fff;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+/* Flip Coin button - after click */
+#flipBtn.clicked {
+  background: linear-gradient(135deg, #9c27b0, #6a1b9a);
+  color: #fff;
+}   
+#pageTitle {
+  color: #283593;   /* same orange family as Generate button */
+  font-weight: 700;
+  margin-bottom: 8px;
+}    
 </style>
 </head>
 <body>
 
-<h2>🏏 Cricket Team Maker 🏏</h2>
+<h1 id="pageTitle">🏏 Cricket Team Maker</h1>
 <p style="max-width:700px;margin:10px auto;font-size:15px;opacity:0.95;">
 Cricket Team Assigner is a free online tool that helps players randomly divide
 themselves into two fair cricket teams and perform a virtual coin toss for
@@ -80,7 +101,9 @@ friendly, street, and local cricket matches.
   <h3 style="color:deepskyblue;">Team 2 🔵</h3><div id="team2"></div>
   <h3 id="bothLabel" style="color:limegreen;display:none;">Both (Shared) 🟢</h3><div id="both"></div>
 
-  <button onclick="flipCoin()">Flip Coin 🪙</button>
+  <button id="flipBtn" onclick="flipCoin()">
+  Flip Coin 🪙
+</button>
   <div id="coin">🪙</div>
   <div id="tossResult"></div>
 </div>
