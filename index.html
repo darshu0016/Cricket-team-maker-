@@ -280,6 +280,10 @@ function badge(section,id,color){
   document.getElementById(section).appendChild(d);
 }
 function showNameInputs(){
+  // 🔹 Hide number-based stage
+  document.getElementById("playerButtons").innerHTML = "";
+  document.getElementById("resultBox").style.display = "none";  
+
   const n = parseInt(document.getElementById("numPlayers").value);
   if(!n || n < 4 || n > 22){
     alert("First enter number of players (4–22)");
