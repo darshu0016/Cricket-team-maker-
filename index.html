@@ -181,11 +181,13 @@ function generateButtons(){
   if (genBtn) genBtn.classList.add("clicked");
 
   const n = parseInt(document.getElementById("numPlayers").value);
-  if(!n || n < 4 || n > 22){
+  if (!n || n < 4 || n > 22) {
     alert("Enter between 4 and 22 players.");
-     setTimeout(() => {
-  if (genBtn) genBtn.classList.remove("clicked");
-}, 150); 
+
+    setTimeout(() => {
+      if (genBtn) genBtn.classList.remove("clicked");
+    }, 150);
+
     return;
   }
 
@@ -201,18 +203,18 @@ function generateButtons(){
   document.getElementById("coin").style.display = "none";
   document.getElementById("tossResult").innerHTML = "";
 
-  for(let i = 1; i <= n; i++){
+  for (let i = 1; i <= n; i++) {
     const b = document.createElement("button");
     b.textContent = "Player " + i;
     b.onclick = () => reveal(b, i);
     document.getElementById("playerButtons").appendChild(b);
   }
-      }
-  // ✅ Reset button AFTER generation completes
+
+  // ✅ reset after generation
   setTimeout(() => {
     if (genBtn) genBtn.classList.remove("clicked");
   }, 150);
-}
+    }
 function reveal(btn,id){
   const team=assignments[id];
   const tb=document.getElementById("soundBoth");
@@ -239,29 +241,31 @@ function badge(section,id,color){
 }
 
 function flipCoin(){
-    document.getElementById("flipBtn").classList.add("clicked");
-  const coin=document.getElementById("coin"),
-        res=document.getElementById("tossResult");
+  const flipBtn = document.getElementById("flipBtn");
+  if (flipBtn) flipBtn.classList.add("clicked");
 
-  coin.style.display="block";
-  coin.style.background="radial-gradient(circle,gold 60%,#c09000)";
-  coin.style.animation="spin 2s ease-in-out";
-  res.textContent="";
+  const coin = document.getElementById("coin"),
+        res  = document.getElementById("tossResult");
 
-  // Decide winner right before spin ends for perfect randomness
+  coin.style.display = "block";
+  coin.style.background = "radial-gradient(circle,gold 60%,#c09000)";
+  coin.style.animation = "spin 2s ease-in-out";
+  res.textContent = "";
+
   const winner = Math.random() < 0.5 ? 'team1' : 'team2';
 
-  // Delay to show result AFTER spin
   setTimeout(()=>{
-     coin.style.animation="none";
-     if(winner==='team1'){
-        coin.style.background="radial-gradient(circle,red 60%,darkred)";
-        res.innerHTML='<span style="color:red;">🏆 Team 1 Won the Toss!</span>';
-     }else{
-        coin.style.background="radial-gradient(circle,deepskyblue 60%,navy)";
-        res.innerHTML='<span style="color:deepskyblue;">🏆 Team 2 Won the Toss!</span>';
-     }
-      if (flipBtn) flipBtn.classList.remove("clicked");
+    coin.style.animation = "none";
+
+    if (winner === 'team1') {
+      coin.style.background = "radial-gradient(circle,red 60%,darkred)";
+      res.innerHTML = '<span style="color:red;">🏆 Team 1 Won the Toss!</span>';
+    } else {
+      coin.style.background = "radial-gradient(circle,deepskyblue 60%,navy)";
+      res.innerHTML = '<span style="color:deepskyblue;">🏆 Team 2 Won the Toss!</span>';
+    }
+
+    if (flipBtn) flipBtn.classList.remove("clicked");
   }, 2000);
 }
 </script>
