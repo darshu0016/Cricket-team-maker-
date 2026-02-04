@@ -145,6 +145,15 @@ body {
   color: #fff;
   font-weight: bold;
   border-radius: 8px;
+}   
+#singlesBox button {
+  width: 70px;
+  height: 50px;
+  margin: 6px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
 }    
 </style>
 </head>
@@ -166,16 +175,22 @@ friendly, street, and local cricket matches.
 <button id="generateBtn" onclick="generateButtons()">
   Generate Players 🏏
 </button>
-
+<div class="mainActions">
+  <button id="generateBtn" onclick="generateButtons()">  
+    Generate Players 🏏  
+  </button>
 
   <button id="nameBtn" onclick="showNameInputs()">  
     Generate Using Names 🧑‍🤝‍🧑  
   </button>
+    <button id="singlesBtn" onclick="startSingles()">
+  Singles 🎯
+    </button>
 </div>
-
+<div id="nameInputBox" style="display:none;margin-top:15px;"></div>
+<div id="singlesBox" style="display:none;margin-top:15px;"></div>
 <div class="player-buttons" id="playerButtons"></div>    
 
-<div id="nameInputBox" style="display:none;margin-top:15px;"></div>
 
 <div id="resultBox" style="display:none;">
   <h3 style="color:red;">Team 1 🔴</h3><div id="team1"></div>
@@ -340,6 +355,43 @@ function assignNames(n){
 
   // ✅ RE-ENABLE number mode AFTER name assignment completes
   document.getElementById("generateBtn").disabled = false;
+}   
+function startSingles(){
+  // 🔹 Hide other stages
+  document.getElementById("playerButtons").innerHTML = "";
+  document.getElementById("resultBox").style.display = "none";
+  document.getElementById("nameInputBox").style.display = "none";
+
+  const n = parseInt(document.getElementById("numPlayers").value);
+  if(!n || n < 2 || n > 22){
+    alert("Enter number of players (2–22)");
+    return;
+  }
+
+  // Create numbers 1..n and shuffle
+  const nums = Array.from({length: n}, (_, i) => i + 1);
+  shuffle(nums); // you already have shuffle()
+
+  const box = document.getElementById("singlesBox");
+  box.innerHTML = "<h3>Singles – Click to Reveal</h3>";
+  box.style.display = "block";
+
+  for(let i = 0; i < n; i++){
+    const btn = document.createElement("button");
+    btn.textContent = "?";
+
+    btn.onclick = function(){
+      revealSingle(btn, nums[i]);
+    };
+
+    box.appendChild(btn);
+  }
+}    
+function revealSingle(btn, number){
+  btn.textContent = number;
+  btn.disabled = true;
+  btn.style.background = "#4caf50";
+  btn.style.color = "#fff";
 }    
 function flipCoin(){
   const flipBtn = document.getElementById("flipBtn");
