@@ -1,6 +1,7 @@
 {
   "name": "Cricket Team Maker",
   "short_name": "Team Maker",
+  "description": "Create fair cricket teams instantly and perform a coin toss for local matches.",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
