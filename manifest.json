@@ -1,29 +1,13 @@
-{
-  "name": "Cricket Team Maker",
-  "short_name": "CricketTM",
-  "description": "Free cricket team generator with coin toss and singles mode",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#0d1b2a",
-  "theme_color": "#0d1b2a",
-  "icons": [
-    {
-      "src": "https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/1f3cf.png",
-      "sizes": "72x72",
-      "type": "image/png"
-    },
-    {
-      "src": "https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/1f3cf.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "https://raw.githubusercontent.com/twitter/twemoji/master/assets/72x72/1f3cf.png",
-      "sizes": "512x512",
-      "type": "image/png"
-    }
-  ],
-  "categories": ["sports", "games"],
-  "lang": "en"
-}
+"icons": [
+  {
+    "src": "logo-192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  },
+  {
+    "src": "logo-512.png",
+    "sizes": "512x512",
+    "type": "image/png",
+    "purpose": "any maskable"
+  }
+]
